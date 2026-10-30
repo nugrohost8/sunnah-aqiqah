@@ -6,15 +6,17 @@ import {
   int,
   mysqlEnum,
   mysqlTable,
-  serial,
   text,
   timestamp,
   tinyint,
   varchar,
 } from "drizzle-orm/mysql-core";
 
+// Bukan serial(): drizzle-kit menulisnya sebagai `serial AUTO_INCREMENT`, yang ditolak MariaDB.
+const id = () => bigint("id", { mode: "number", unsigned: true }).autoincrement().primaryKey();
+
 export const adminUsers = mysqlTable("admin_users", {
-  id: serial("id").primaryKey(),
+  id: id(),
   email: varchar("email", { length: 191 }).notNull().unique(),
   name: varchar("name", { length: 120 }).notNull(),
   passwordHash: varchar("password_hash", { length: 100 }).notNull(),
@@ -23,7 +25,7 @@ export const adminUsers = mysqlTable("admin_users", {
 
 /** Paket aqiqah per ekor: "masak" (sate & gule) atau "tanpa_masak" (hewan saja). */
 export const aqiqahPackages = mysqlTable("aqiqah_packages", {
-  id: serial("id").primaryKey(),
+  id: id(),
   kind: mysqlEnum("kind", ["masak", "tanpa_masak"]).notNull(),
   code: varchar("code", { length: 20 }).notNull(),
   priceBetina: int("price_betina").notNull(),
@@ -36,7 +38,7 @@ export const aqiqahPackages = mysqlTable("aqiqah_packages", {
 });
 
 export const nasiBoxes = mysqlTable("nasi_boxes", {
-  id: serial("id").primaryKey(),
+  id: id(),
   name: varchar("name", { length: 120 }).notNull(),
   contents: text("contents").notNull(),
   price: int("price").notNull(),
@@ -46,7 +48,7 @@ export const nasiBoxes = mysqlTable("nasi_boxes", {
 });
 
 export const bundlingPrices = mysqlTable("bundling_prices", {
-  id: serial("id").primaryKey(),
+  id: id(),
   gender: mysqlEnum("gender", ["perempuan", "laki"]).notNull(),
   animal: mysqlEnum("animal", ["jantan", "betina"]).notNull(),
   boxes: int("boxes").notNull(),
@@ -57,7 +59,7 @@ export const bundlingPrices = mysqlTable("bundling_prices", {
 });
 
 export const testimonials = mysqlTable("testimonials", {
-  id: serial("id").primaryKey(),
+  id: id(),
   name: varchar("name", { length: 120 }).notNull(),
   subtitle: varchar("subtitle", { length: 191 }).notNull().default(""),
   quote: text("quote").notNull(),
@@ -67,7 +69,7 @@ export const testimonials = mysqlTable("testimonials", {
 });
 
 export const faqs = mysqlTable("faqs", {
-  id: serial("id").primaryKey(),
+  id: id(),
   question: varchar("question", { length: 255 }).notNull(),
   answer: text("answer").notNull(),
   sortOrder: int("sort_order").notNull().default(0),
@@ -75,7 +77,7 @@ export const faqs = mysqlTable("faqs", {
 });
 
 export const partners = mysqlTable("partners", {
-  id: serial("id").primaryKey(),
+  id: id(),
   name: varchar("name", { length: 120 }).notNull(),
   logo: varchar("logo", { length: 255 }).notNull(),
   sortOrder: int("sort_order").notNull().default(0),
@@ -84,7 +86,7 @@ export const partners = mysqlTable("partners", {
 
 /** Slide pada Hero Section halaman utama. `image` berupa path /images/... atau /uploads/... */
 export const heroSlides = mysqlTable("hero_slides", {
-  id: serial("id").primaryKey(),
+  id: id(),
   image: varchar("image", { length: 255 }).notNull(),
   eyebrow: varchar("eyebrow", { length: 120 }).notNull().default(""),
   title: varchar("title", { length: 160 }).notNull(),
@@ -105,7 +107,7 @@ export const siteSettings = mysqlTable("site_settings", {
 export const ORDER_STATUSES = ["baru", "diproses", "selesai", "batal"] as const;
 
 export const orders = mysqlTable("orders", {
-  id: serial("id").primaryKey(),
+  id: id(),
   name: varchar("name", { length: 120 }).notNull(),
   phone: varchar("phone", { length: 30 }).notNull(),
   childName: varchar("child_name", { length: 120 }),
@@ -124,7 +126,7 @@ export const WA_MESSAGE_KINDS = ["admin", "customer", "status", "test"] as const
 export const waMessages = mysqlTable(
   "wa_messages",
   {
-    id: serial("id").primaryKey(),
+    id: id(),
     orderId: bigint("order_id", { mode: "number", unsigned: true }).references(() => orders.id, { onDelete: "cascade" }),
     kind: mysqlEnum("kind", WA_MESSAGE_KINDS).notNull(),
     recipient: varchar("recipient", { length: 30 }).notNull(),

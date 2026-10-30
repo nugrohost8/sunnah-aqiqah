@@ -1,5 +1,5 @@
 CREATE TABLE `wa_messages` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`order_id` bigint unsigned,
 	`kind` enum('admin','customer','status','test') NOT NULL,
 	`recipient` varchar(30) NOT NULL,

@@ -1,5 +1,5 @@
 CREATE TABLE `admin_users` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`email` varchar(191) NOT NULL,
 	`name` varchar(120) NOT NULL,
 	`password_hash` varchar(100) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `admin_users` (
 );
 --> statement-breakpoint
 CREATE TABLE `aqiqah_packages` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`kind` enum('masak','tanpa_masak') NOT NULL,
 	`code` varchar(20) NOT NULL,
 	`price_betina` int NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE `aqiqah_packages` (
 );
 --> statement-breakpoint
 CREATE TABLE `bundling_prices` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`gender` enum('perempuan','laki') NOT NULL,
 	`animal` enum('jantan','betina') NOT NULL,
 	`boxes` int NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `bundling_prices` (
 );
 --> statement-breakpoint
 CREATE TABLE `faqs` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`question` varchar(255) NOT NULL,
 	`answer` text NOT NULL,
 	`sort_order` int NOT NULL DEFAULT 0,
@@ -44,7 +44,7 @@ CREATE TABLE `faqs` (
 );
 --> statement-breakpoint
 CREATE TABLE `nasi_boxes` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`name` varchar(120) NOT NULL,
 	`contents` text NOT NULL,
 	`price` int NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE `nasi_boxes` (
 );
 --> statement-breakpoint
 CREATE TABLE `orders` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`name` varchar(120) NOT NULL,
 	`phone` varchar(30) NOT NULL,
 	`child_name` varchar(120),
@@ -70,7 +70,7 @@ CREATE TABLE `orders` (
 );
 --> statement-breakpoint
 CREATE TABLE `partners` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`name` varchar(120) NOT NULL,
 	`logo` varchar(255) NOT NULL,
 	`sort_order` int NOT NULL DEFAULT 0,
@@ -79,7 +79,7 @@ CREATE TABLE `partners` (
 );
 --> statement-breakpoint
 CREATE TABLE `testimonials` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`name` varchar(120) NOT NULL,
 	`subtitle` varchar(191) NOT NULL DEFAULT '',
 	`quote` text NOT NULL,

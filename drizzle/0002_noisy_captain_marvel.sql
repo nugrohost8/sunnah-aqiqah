@@ -1,5 +1,5 @@
 CREATE TABLE `hero_slides` (
-	`id` serial AUTO_INCREMENT NOT NULL,
+	`id` bigint unsigned AUTO_INCREMENT NOT NULL,
 	`image` varchar(255) NOT NULL,
 	`eyebrow` varchar(120) NOT NULL DEFAULT '',
 	`title` varchar(160) NOT NULL,
